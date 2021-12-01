@@ -1,61 +1,61 @@
 const net = require("net");
 
-// establishes a connection with the game server
 const connect = function () {
   const conn = net.createConnection({
-    host: 165.227.47.243
-    port: 50541
+    host: '165.227.47.243',
+    port: 50541,
   });
 
-  // interpret incoming data as text
+ 
   conn.setEncoding("utf8");
-
-  // data event;
+  
+  
   conn.on('data',function(message){
     console.log(message);
   });
 
-  // connect event
-  conn.on('connect', function(){
+
+  conn.on('connect',function(){
     console.log("Successfully connected to game server");
-  }
 
-  // push name to server:
+    // push name to server:
+    conn.write(`Name: AYF`);
 
-  conn.write(`Name: AYF`);
-
-
-  // move snake up 
-
-  setTimeout(() => {
-    conn.write('Move: up');
-}, 500);
-
-  // move snake down
-
-  setTimeout(() => {
-    conn.write('Move: down');
-}, 500);
-
-
-  // move snake left
-
-  setTimeout(() => {
-    conn.write('Move: left');
-}, 500);
-
-
-
-  // move snake right
-
+    /*
+    // using setInterval - moves snake up indefinitely
+    setInterval(() => {
+      conn.write(`Move: up`)
+    }, 100);
+    
+    // using setTimeout - moves snake up incrementally
+    // move snake up:
     setTimeout(() => {
-        conn.write('Move: right');
-    }, 500);
-  
+      conn.write(`Move: up`)
+    }, 250);
+    // move snake left:
+    setTimeout(() => {
+      conn.write(`Move: left`)
+    }, 300);
+    // move snake up again:
+    setTimeout(() => {
+      conn.write(`Move: up`)
+    }, 350);
+    // move snake left again:
+    setTimeout(() => {
+      conn.write(`Move: left`)
+    }, 400);
+    
+    // move snake up again:
+    setTimeout(() => {
+      conn.write(`Move: up`)
+    }, 450);
+    */
+
+
+
+  });
 
   return conn;
-
 };
 
 module.exports = connect;
-// module.exports - net;
