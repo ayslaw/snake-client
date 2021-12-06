@@ -1,4 +1,5 @@
 let connection;
+
 const setupInput = function (conn) {
   connection = conn;
   const stdin = process.stdin;
@@ -10,42 +11,39 @@ const setupInput = function (conn) {
 };
 
 const handleUserInput = function (key) {
+
   if (key === '\u0003') {
-    // \u0003 = ctrl+c. if user inputs ctrl+c, exit the game
+    // \u0003 = ctrl+c
+    console.log(`Adios`)
+    // if ctrl+c, exit the game
     process.exit();
-  
-  
-  }
-
-  if (key === 'w') {
-    connection.write("Move: up");
-  }
-  
-  if (key === 's') {
-    connection.write("Move: down");
-
-  }
-    if (key === 'a') {
-      connection.write("Move: left");
-
-    }
-      if (key === 'd') {
-        connection.write("Move: right");
-
-      }
-
+  } else if (key === "w") {
+    connection.write(`Move: up`);
+    console.log(`Moved up`);
+  } else if (key === "a") {
+    connection.write(`Move: left`);
+    console.log(`Moved left`);
+  } else if (key === "s") {
+    connection.write(`Move: down`);
+    console.log(`Moved down`);
+  } else if (key === "d") {
+    connection.write(`Move: right`);
+    console.log(`Moved right`);
+  } else if (key === "1") {
+    // chat key - greeting
+    connection.write(`Say: Hey!`);
+    console.log(`Sent: hello!`);
+  } else if (key === "2") {
+    // chat key - comment
+    connection.write(`Say: Great!`);
+    console.log(`Sent: nice move!`);
+  } else if (key === "0") {
+    // chat key - sign off
+    connection.write(`Say: PEACE`);
+    console.log(`Sent: PEACE`);
+  } else {
+    console.log(`ERROR: incorrect input, try again!`)
+  };
 };
-
-
-
-
-// binding movements to commands 
-
-// up = 38;
-// down = 40
-// right = 39
-//left = 37
-
-
 
 module.exports = setupInput;
